@@ -1,4 +1,4 @@
-# a practice for django and nuxtjs by making flashcard app.
+# A study for django and nuxtjs with making flashcard app.
 ## backend
 django + django rest framework
 
