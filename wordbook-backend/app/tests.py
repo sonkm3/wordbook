@@ -207,14 +207,6 @@ class CourseViewTestCase(TestCase):
         response = client.get(f"http://testserver/courses/{self.course1.id}/")
         self.assertEqual(404, response.status_code)
 
-    def test_post_course_fail(self):
-        client = APIClient()
-        client.force_authenticate(user=self.student2.user)
-        response = client.post(
-            "http://testserver/courses/", {"title": "new", "student": self.student1.id}
-        )
-        self.assertEqual(400, response.status_code)
-
     def test_patch_course_fail(self):
         client = APIClient()
         client.force_authenticate(user=self.student2.user)
