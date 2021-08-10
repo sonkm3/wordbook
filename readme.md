@@ -4,7 +4,7 @@ django + django rest framework
 
 `cd wordbook-backend`  
 `pip install -r requirements.txt`  
-`./manage.py makemigrations`  
+`./manage.py makemigrations app`  
 `./manage.py migrate`  
 `./manage.py runserver`
 
@@ -12,9 +12,9 @@ django + django rest framework
 nuxtjs + vuetify
 
 `cd wordbook-frontend`  
-`npm -i`  
+`npm i`  
 `cd wordbook`  
-`npm -i`  
+`npm i`  
 `npm run dev`
 
 open `http://localhost:3000/`
