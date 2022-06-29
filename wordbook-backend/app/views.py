@@ -27,13 +27,6 @@ class WordViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Word.objects.course(self.request.user.student, self.kwargs["course_pk"])
 
-    def create(self, request, *args, **kwargs):
-        if hasattr(request.data, "_mutable"):
-            setattr(request.data, "_mutable", True)
-        request.data["course"] = self.kwargs["course_pk"]
-
-        return super().create(request, *args, **kwargs)
-
     @action(detail=False)
     def practice(self, request, *args, **kwargs):
         words = self.get_queryset().order_by("?")
@@ -51,10 +44,3 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Course.objects.student(self.request.user.student)
-
-    def create(self, request, *args, **kwargs):
-        if hasattr(request.data, "_mutable"):
-            setattr(request.data, "_mutable", True)
-        request.data["student"] = request.user.student.pk
-
-        return super().create(request, *args, **kwargs)

@@ -86,9 +86,8 @@ class WordViewTestCase(TestCase):
         client = APIClient()
         client.force_authenticate(user=self.student1.user)
         response = client.post(
-            # f"http://testserver/courses/{self.course1.id}/words/", {"word": "new", "course": self.course1.id}
             f"http://testserver/courses/{self.course1.id}/words/",
-            {"word": "new"},
+            {"word": "new", "course": self.course1.id}
         )
         self.assertEqual(201, response.status_code)
         self.assertEqual(2, Word.objects.all().count())

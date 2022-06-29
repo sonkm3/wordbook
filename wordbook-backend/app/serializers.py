@@ -15,6 +15,12 @@ class WordSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(message)
         return course
 
+    def to_internal_value(self, data):
+        ret = super().to_internal_value(data)
+        if hasattr(data, "course_pk"):
+            ret["course"] = data.pop("course_pk")
+        return ret
+
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,3 +33,10 @@ class CourseSerializer(serializers.ModelSerializer):
             message = "Owner and request user must be matched."
             raise serializers.ValidationError(message)
         return student
+
+    def to_internal_value(self, data):
+        ret = super().to_internal_value(data)
+        if hasattr(data, "student"):
+            data.pop("student")
+        ret["student"] = self.context["request"].user.student
+        return ret
